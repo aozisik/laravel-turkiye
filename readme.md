@@ -1,6 +1,8 @@
 Laravel Türkiye Paketi 🇹🇷
 ==========
 
+![](https://travis-ci.org/aozisik/laravel-turkiye.svg?branch=master)
+
 Bu paket, Türkiye için geliştirilen Laravel tabanlı uygulamaların ihtiyaç duyabileceği temel işlevleri bir arada sunmak amacıyla oluşturuldu. Kütüphaneyi boş zamanlarımda geliştireceğim ve özellikler eklendikçe aşağıdaki listeyi ve dokümantasyonu güncelleyeceğim.
 
 Aklınıza gelen yeni özellikler için pull request açabilirsiniz.
