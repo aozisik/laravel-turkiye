@@ -1,16 +1,14 @@
 Laravel Türkiye Paketi 🇹🇷
 ==========
 
-Bu paket, Türkiye için geliştirilen Laravel tabanlı uygulamaların ihtiyaç duyabileceği temel işlevleri bir arada sunmak amacıyla oluşturuldu.
-
-Kütüphaneyi boş zamanlarımda geliştireceğim ve özellikler eklendikçe aşağıdaki listeyi ve dokümantasyonu güncelleyeceğim.
+Bu paket, Türkiye için geliştirilen Laravel tabanlı uygulamaların ihtiyaç duyabileceği temel işlevleri bir arada sunmak amacıyla oluşturuldu. Kütüphaneyi boş zamanlarımda geliştireceğim ve özellikler eklendikçe aşağıdaki listeyi ve dokümantasyonu güncelleyeceğim.
 
 Aklınıza gelen yeni özellikler için pull request açabilirsiniz.
 
 ## Temel Özellikler
 
 #### Doğrulama
-- [ ] T.C. Kimlik No doğrulama
+- [x] T.C. Kimlik No doğrulama
 - [ ] Vergi Kimlik No doğrulama
 - [ ] Türkiye IBAN No doğrulama
 - [ ] Sabit telefon doğrulama (alan kodu ve uzunluk)
@@ -21,9 +19,10 @@ Aklınıza gelen yeni özellikler için pull request açabilirsiniz.
 #### Dil Yardımcıları
 - [ ] `İ` ve `ı` gibi Türkçe karakterleri bozmadan dizgeleri küçük veye büyük harfe çevirme.
 - [ ] İsimleri -e, -de, -den, -i hallerine çekimleyebilme
+- [ ] İyelik ekleri (Ayşe'nin, Fatma'nın, Cüneyt'in, ...)
 - [ ] Sıralama ekleri (1'inci, 2'inci, 3'üncü gibi)
 - [ ] Bir sayıyı yazıyla ifade etme (ör: iki yüz elli üç bin)
 
 ## Kullanım
 
-Henüz paket geliştirilme aşamasındadır.
+Henüz paket geliştirilme aşamasındadır. Kullanım hakkında bilgi çok yakında eklenecek.
