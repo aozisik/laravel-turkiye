@@ -8,6 +8,26 @@ class LanguageTests extends TestCase
     /**
      * @test
      */
+    public function kucuk_harf()
+    {
+        $this->assertEquals('çılgın koşu', tr_strtolower('ÇIlgın KoŞu'));
+        $this->assertEquals('iyelik ekleri', tr_strtolower('İyelİk eklerİ'));
+        $this->assertEquals('ılık rüzgarlar', tr_strtolower('ıLIK RÜZGARLAR'));
+    }
+
+    /**
+     * @test
+     */
+    public function baslik_bicemi()
+    {
+        $this->assertEquals('Çılgın Koşu', tr_ucwords('ÇILgın koŞu'));
+        $this->assertEquals('İyelik Ekleri', tr_ucwords('iYelik eklerİ'));
+        $this->assertEquals('Ilık Rüzgarlar', tr_ucwords('ıLIK RÜZGARLAR'));
+    }
+
+    /**
+     * @test
+     */
     public function i_hali()
     {
         $this->assertSuffix('Suat\'ı', 'Suat', 'i');
