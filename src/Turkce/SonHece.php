@@ -3,33 +3,23 @@ namespace Aozisik\Turkiye\Turkce;
 
 class SonHece
 {
-    public $sonHarfSesli;
+    public $sonHarfUnlu;
 
     private $soz;
-    private $sert;
-    private $kalin;
-    private $yuvarlak;
+    private $sonHarf;
+    private $sonUnluHarf;
 
-    private $sesliler = ['a', 'e', 'ı', 'i', 'o', 'ö', 'u', 'ü'];
-    private $yuvarlakSesliler = ['o', 'ö', 'u', 'ü'];
-    private $kalinSesliler = ['a', 'ı', 'u', 'o'];
-
-    private $sertSessizler = ['f', 's', 't', 'k', 'ç', 'ş', 'h', 'p'];
+    private $unluler = ['a', 'e', 'ı', 'i', 'o', 'ö', 'u', 'ü'];
 
     public function __construct($soz)
     {
         $soz = $this->sonSoz($soz);
         $soz = str_replace(['i', 'I'], ['İ', 'ı'], $soz);
         $soz = mb_strtolower($soz, 'UTF-8');
+
         $this->soz = $soz;
-
-        $sonHarf = mb_substr($soz, -1);
-        $this->sonHarfSesli = in_array($sonHarf, $this->sesliler);
-
-        $sonSesliHarf = $this->sonSesli($soz);
-        $this->sert = in_array($sonHarf, $this->sertSessizler);
-        $this->kalin = in_array($sonSesliHarf, $this->kalinSesliler);
-        $this->yuvarlak = in_array($sonSesliHarf, $this->yuvarlakSesliler);
+        $this->sonHarf = mb_substr($soz, -1);
+        $this->sonUnluHarf = $this->sonUnluHarfiBul();
     }
 
     private function sonSoz($soz)
@@ -38,21 +28,29 @@ class SonHece
         return end($sozler);
     }
 
-    private function sonSesli($soz)
+    private function sonUnluHarfiBul()
     {
-        $regex = '/' . implode('|', $this->sesliler) . '/';
-        preg_match_all($regex, $soz, $matches);
-
+        $regex = '/' . implode('|', $this->unluler) . '/';
+        preg_match_all($regex, $this->soz, $matches);
         if (!$matches) {
             return false;
         }
-
         return end($matches[0]);
+    }
+
+    public function sonHarfUnlu()
+    {
+        return in_array($this->sonHarf, [
+            'a', 'e', 'ı', 'i', 'o', 'ö', 'u', 'ü'
+        ]);
     }
 
     public function sert()
     {
-        return $this->sert;
+        // Fıstıkçı şahap :)
+        return in_array($this->sonHarf, [
+            'f', 's', 't', 'k', 'ç', 'ş', 'h', 'p'
+        ]);
     }
 
     public function yumusak()
@@ -71,7 +69,10 @@ class SonHece
         if (in_array(substr($this->soz, -3), $istisnalar)) {
             return false;
         }
-        return $this->kalin;
+
+        return in_array($this->sonUnluHarf, [
+            'a', 'ı', 'u', 'o'
+        ]);
     }
 
     public function ince()
@@ -81,7 +82,9 @@ class SonHece
 
     public function yuvarlak()
     {
-        return $this->yuvarlak;
+        return in_array($this->sonUnluHarf, [
+            'o', 'ö', 'u', 'ü'
+        ]);
     }
 
     public function duz()

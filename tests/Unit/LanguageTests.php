@@ -10,8 +10,10 @@ class LanguageTests extends TestCase
      */
     public function i_hali()
     {
-        $this->assertSuffix('Asu\'yu', 'Asu', 'i');
         $this->assertSuffix('Suat\'ı', 'Suat', 'i');
+
+        $this->assertSuffix('Asu\'yu', 'Asu', 'i');
+
         $this->assertSuffix('Ümmü\'yü', 'Ümmü', 'i');
         $this->assertSuffix('Ahmet\'i', 'Ahmet', 'i');
         $this->assertSuffix('Kemal\'i', 'Kemal', 'i');

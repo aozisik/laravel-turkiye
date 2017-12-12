@@ -7,29 +7,37 @@ class Cekim
     private $soz;
     private $sonHece;
     private $kaynastirma;
-
-    public function __construct($soz)
-    {
-        $this->soz = $soz;
-        $this->sonHece = new SonHece($soz);
-    }
+    private $kosulHafizasi;
 
     public static function yeni($soz)
     {
         return new self($soz);
     }
 
+    public function __construct($soz)
+    {
+        $this->kosulHafizasi = [];
+        $this->sonuc = $soz . '\'';
+        $this->sonHece = new SonHece($soz);
+    }
+
     public function kaynastirma($harf)
     {
-        $this->kaynastirma = $harf;
+        if ($this->sonHece->sonHarfUnlu()) {
+            $this->sonuc .= $harf;
+        }
         return $this;
     }
 
     public function kural($kosullar, $ek)
     {
+        if ($this->ek) {
+            // İsabetli kural bulundu, başka kontrole gerek yok
+            return $this;
+        }
         $kosullar = explode(',', $kosullar);
         foreach ($kosullar as $kosul) {
-            if (!$this->sonHece->$kosul()) {
+            if (!$this->kosulUyumu($kosul)) {
                 // Bir koşul sağlanmadığında bitir.
                 return $this;
             }
@@ -38,14 +46,16 @@ class Cekim
         return $this;
     }
 
+    private function kosulUyumu($kosul)
+    {
+        if (!isset($this->kosulHafizasi[$kosul])) {
+            $this->kosulHafizasi[$kosul] = $this->sonHece->$kosul();
+        }
+        return $this->kosulHafizasi[$kosul];
+    }
+
     public function sonuc()
     {
-        $sonuc = $this->soz . '\'';
-
-        if ($this->kaynastirma && $this->sonHece->sonHarfSesli) {
-            $sonuc .= $this->kaynastirma;
-        }
-
-        return $sonuc .= $this->ek;
+        return $this->sonuc .= $this->ek;
     }
 }
