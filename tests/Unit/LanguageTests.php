@@ -15,7 +15,7 @@ class LanguageTests extends TestCase
         $this->assertSuffix('Ümmü\'yü', 'Ümmü', 'i');
         $this->assertSuffix('Ahmet\'i', 'Ahmet', 'i');
         $this->assertSuffix('Kemal\'i', 'Kemal', 'i');
-        $this->assertSuffix('Orhon\'u', 'Orhon', 'u');
+        $this->assertSuffix('Orhon\'u', 'Orhon', 'i');
         $this->assertSuffix('Tuğrul\'u', 'Tuğrul', 'i');
         $this->assertSuffix('Şükran\'ı', 'Şükran', 'i');
         $this->assertSuffix('Kamile\'yi', 'Kamile', 'i');

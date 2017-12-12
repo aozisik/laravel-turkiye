@@ -9,42 +9,51 @@ class Ek
     public function __construct($soz)
     {
         $this->soz = $soz;
-        $this->sonHece = new SonHece($soz);
     }
 
     public function i()
     {
-        return $this->cekimle('i', 'y');
-    }
-
-    public function e()
-    {
-        return $this->soz . 'e';
-    }
-
-    public function de()
-    {
-        return $this->soz . 'de';
-    }
-
-    public function den()
-    {
-        return $this->soz . 'den';
+        return Cekim::yeni($this->soz)
+            ->kaynastirma('y')
+            ->kural('duz,ince', 'i')
+            ->kural('duz,kalin', 'ı')
+            ->kural('yuvarlak,ince', 'ü')
+            ->kural('yuvarlak,kalin', 'u')
+            ->sonuc();
     }
 
     public function in()
     {
-        return $this->soz . 'in';
+        return Cekim::yeni($this->soz)
+            ->kaynastirma('n')
+            ->kural('duz,ince', 'in')
+            ->kural('duz,kalin', 'ın')
+            ->kural('yuvarlak,ince', 'ün')
+            ->kural('yuvarlak,kalin', 'un')
+            ->sonuc();
     }
 
-    private function cekimle($ek, $kaynastirma)
+    public function e()
     {
-        $cikti = $this->soz . '\'';
+        return Cekim::yeni($this->soz)
+            ->kaynastirma('y')
+            ->kural('ince', 'e')
+            ->kural('kalin', 'a')
+            ->sonuc();
+    }
 
-        if ($this->sonHece->sonHarfSesli) {
-            $cikti .= $kaynastirma;
-        }
+    public function de()
+    {
+        return Cekim::yeni($this->soz)
+            ->kural('sert,ince', 'te')
+            ->kural('sert,kalin', 'ta')
+            ->kural('yumusak,ince', 'de')
+            ->kural('yumusak,kalin', 'da')
+            ->sonuc();
+    }
 
-        return $this->soz . '\'' . $ek;
+    public function den()
+    {
+        return $this->de() . 'n';
     }
 }
