@@ -19,7 +19,7 @@ Aklınıza gelen yeni özellikler için pull request açabilirsiniz.
 - [ ] Plaka Doğrulama
 
 #### Dil Yardımcıları
-- [ ] `İ` ve `ı` gibi Türkçe karakterleri bozmadan dizgeleri küçük veye büyük harfe çevirme.
+- [x] `İ` ve `ı` gibi Türkçe karakterleri bozmadan dizgeleri küçük veye büyük harfe çevirme.
 - [x] İsimleri -e, -de, -den, -i hallerine çekimleyebilme
 - [x] İyelik ekleri (Ayşe'nin, Fatma'nın, Cüneyt'in, ...)
 - [ ] Sıralama ekleri (1'inci, 2'inci, 3'üncü gibi)
@@ -27,4 +27,4 @@ Aklınıza gelen yeni özellikler için pull request açabilirsiniz.
 
 ## Kullanım
 
-Henüz paket geliştirilme aşamasındadır. Kullanım hakkında bilgi çok yakında eklenecek.
+Bu paket geliştirilme aşamasındadır. Kullanım hakkında bilgi çok yakında eklenecek...
