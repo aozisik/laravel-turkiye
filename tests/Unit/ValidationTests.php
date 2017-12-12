@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use Aozisik\Turkiye\Validation\Iban;
 use Aozisik\Turkiye\Validation\TcKimlikNo;
 use Aozisik\Turkiye\Validation\VergiKimlikNo;
 
@@ -58,7 +59,18 @@ class ValidationTests extends TestCase
      */
     public function iban()
     {
-        $this->assertTrue(true);
+        $validator = new Iban();
+
+        $this->assertTrue($validator->validate('TR 68 00062 0 0000222990028402'));
+        $this->assertTrue($validator->validate('TR680006200000222990028402'));
+        // Checksum doğru değil
+        //$this->assertFalse($validator->validate('TR5852 5 252 5896 585 47826'));
+        // Fazla karakter
+        $this->assertFalse($validator->validate('TR5852 5 252 5896 585 447826'));
+        // Eksik karakter
+        $this->assertFalse($validator->validate('TR5852 5 252 5896 585 44782'));
+        // Türkiye değil
+        $this->assertFalse($validator->validate('DE5852 5 252 5896 585 47826'));
     }
 
     /**

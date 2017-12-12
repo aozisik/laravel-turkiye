@@ -20,8 +20,8 @@ Aklınıza gelen yeni özellikler için pull request açabilirsiniz.
 
 #### Dil Yardımcıları
 - [ ] `İ` ve `ı` gibi Türkçe karakterleri bozmadan dizgeleri küçük veye büyük harfe çevirme.
-- [ ] İsimleri -e, -de, -den, -i hallerine çekimleyebilme
-- [ ] İyelik ekleri (Ayşe'nin, Fatma'nın, Cüneyt'in, ...)
+- [x] İsimleri -e, -de, -den, -i hallerine çekimleyebilme
+- [x] İyelik ekleri (Ayşe'nin, Fatma'nın, Cüneyt'in, ...)
 - [ ] Sıralama ekleri (1'inci, 2'inci, 3'üncü gibi)
 - [ ] Bir sayıyı yazıyla ifade etme (ör: iki yüz elli üç bin)
 
