@@ -11,7 +11,7 @@ Aklınıza gelen yeni özellikler için pull request açabilirsiniz.
 
 #### Doğrulama
 - [x] T.C. Kimlik No doğrulama
-- [ ] Vergi Kimlik No doğrulama
+- [x] Vergi Kimlik No doğrulama
 - [ ] Türkiye IBAN No doğrulama
 - [ ] Sabit telefon doğrulama (alan kodu ve uzunluk)
 - [ ] Cep telefonu doğrulama (operatör kodu ve uzunluk)

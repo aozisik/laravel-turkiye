@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use Aozisik\Turkiye\Validation\TcKimlikNo;
+use Aozisik\Turkiye\Validation\VergiKimlikNo;
 
 class ValidationTests extends TestCase
 {
@@ -27,12 +28,29 @@ class ValidationTests extends TestCase
         $this->assertFalse($validator->validate('342597100692'));
     }
 
+    private function vkn_dogrulama($value)
+    {
+        $validation = new VergiKimlikNo();
+        return $validation->validate($value);
+    }
+
     /**
      * @test
      */
     public function vergi_kimlik_no()
     {
-        $this->assertTrue(true);
+        // Invalid
+        $this->assertFalse($this->vkn_dogrulama('invalid'));
+        $this->assertFalse($this->vkn_dogrulama('1710443373'));
+        $this->assertFalse($this->vkn_dogrulama('0710443371'));
+        // Valid
+        $this->assertTrue($this->vkn_dogrulama('0710443373'));
+        $this->assertTrue($this->vkn_dogrulama('4780163831'));
+        $this->assertTrue($this->vkn_dogrulama('0350003022'));
+        $this->assertTrue($this->vkn_dogrulama('9980070251'));
+        $this->assertTrue($this->vkn_dogrulama('4560007243'));
+        $this->assertTrue($this->vkn_dogrulama('8730341530'));
+        $this->assertTrue($this->vkn_dogrulama('7290012773'));
     }
 
     /**
