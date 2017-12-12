@@ -62,8 +62,13 @@ class SonHece
 
     public function kalin()
     {
+        $istisnalar = [
+            'mal',
+            'lal',
+            'hal'
+        ];
         // Kemal, Bilal, Zuhal gibi istisnalar için...
-        if (substr($this->soz, -2, 2) === 'al') {
+        if (in_array(substr($this->soz, -3), $istisnalar)) {
             return false;
         }
         return $this->kalin;
