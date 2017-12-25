@@ -22,5 +22,12 @@
         "files": [
             "src/helpers.php"
         ]
-    }    
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Aozisik\\Turkiye\\Providers\\TurkiyeServiceProvider"
+            ]
+        }
+    }
 }
