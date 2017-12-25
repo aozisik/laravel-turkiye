@@ -30,15 +30,12 @@ class TcKimlikNo implements Validator
     {
         $a = 0;
         $b = 0;
-
         for ($i = 0;$i < 9;$i = $i + 2) {
             $a = $a + $value[$i];
         }
-
         for ($i = 1;$i < 9;$i = $i + 2) {
             $b = $b + $value[$i];
         }
-
         return ($a * 7 - $b) % 10 == $value[9];
     }
 

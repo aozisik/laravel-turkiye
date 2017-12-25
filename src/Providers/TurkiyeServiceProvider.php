@@ -1,6 +1,7 @@
 <?php
 namespace Aozisik\Turkiye\Providers;
 
+use Aozisik\Turkiye\Validation\Iban;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Aozisik\Turkiye\Validation\TcKimlikNo;
@@ -16,6 +17,10 @@ class TurkiyeServiceProvider extends ServiceProvider
 
         Validator::extend('vkn', function ($attribute, $value, $parameters, $validator) {
             return (new VergiKimlikNo())->validate($value);
+        });
+
+        Validator::extend('tr_iban', function ($attribute, $value, $parameters, $validator) {
+            return (new Iban())->validate($value);
         });
     }
 }
