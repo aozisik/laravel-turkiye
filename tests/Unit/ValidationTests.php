@@ -1,9 +1,9 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Aozisik\Turkiye\Validation\Iban;
-use Aozisik\Turkiye\Validation\TcKimlikNo;
-use Aozisik\Turkiye\Validation\VergiKimlikNo;
+use Aozisik\LaravelTurkiye\Validation\Iban;
+use Aozisik\LaravelTurkiye\Validation\TcKimlikNo;
+use Aozisik\LaravelTurkiye\Validation\VergiKimlikNo;
 
 class ValidationTests extends TestCase
 {

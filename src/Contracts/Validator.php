@@ -1,5 +1,5 @@
 <?php
-namespace Aozisik\Turkiye\Contracts;
+namespace Aozisik\LaravelTurkiye\Contracts;
 
 interface Validator
 {

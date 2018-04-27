@@ -1,11 +1,11 @@
 <?php
-namespace Aozisik\Turkiye\Providers;
+namespace Aozisik\LaravelTurkiye\Providers;
 
 use Aozisik\Turkiye\Validation\Iban;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
-use Aozisik\Turkiye\Validation\TcKimlikNo;
-use Aozisik\Turkiye\Validation\VergiKimlikNo;
+use Aozisik\LaravelTurkiye\Validation\TcKimlikNo;
+use Aozisik\LaravelTurkiye\Validation\VergiKimlikNo;
 
 class TurkiyeServiceProvider extends ServiceProvider
 {

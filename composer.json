@@ -17,16 +17,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Aozisik\\Turkiye\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+            "Aozisik\\LaravelTurkiye\\": "src/"
+        }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Aozisik\\Turkiye\\Providers\\TurkiyeServiceProvider"
+                "Aozisik\\LaravelTurkiye\\Providers\\TurkiyeServiceProvider"
             ]
         }
     }

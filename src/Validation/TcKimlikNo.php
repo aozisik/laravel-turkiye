@@ -1,7 +1,7 @@
 <?php
-namespace Aozisik\Turkiye\Validation;
+namespace Aozisik\LaravelTurkiye\Validation;
 
-use Aozisik\Turkiye\Contracts\Validator;
+use Aozisik\LaravelTurkiye\Contracts\Validator;
 
 class TcKimlikNo implements Validator
 {
