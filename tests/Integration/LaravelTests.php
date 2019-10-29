@@ -1,9 +1,12 @@
 <?php
 
-use Aozisik\LaravelTurkiye\Providers\TurkiyeServiceProvider;
 use App\Console\Kernel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Testing\TestCase;
+use Aozisik\LaravelTurkiye\Rules\TrIbanRule;
+use Aozisik\LaravelTurkiye\Rules\TcKimlikNoRule;
+use Aozisik\LaravelTurkiye\Rules\VergiKimlikNoRule;
+use Aozisik\LaravelTurkiye\Providers\TurkiyeServiceProvider;
 
 class LaravelTests extends TestCase
 {
@@ -25,6 +28,9 @@ class LaravelTests extends TestCase
             'tckn' => '1'
         ];
 
+        $validator = Validator::make($data, ['tckn' => new TcKimlikNoRule]);
+        $this->assertFalse($validator->passes());
+
         $validator = Validator::make($data, ['tckn' => 'tckn']);
         $this->assertFalse($validator->passes());
     }
@@ -36,6 +42,9 @@ class LaravelTests extends TestCase
             'vkn' => '1'
         ];
 
+        $validator = Validator::make($data, ['vkn' => new VergiKimlikNoRule]);
+        $this->assertFalse($validator->passes());
+
         $validator = Validator::make($data, ['vkn' => 'vkn']);
         $this->assertFalse($validator->passes());
     }
@@ -46,6 +55,9 @@ class LaravelTests extends TestCase
         $data = [
             'tr_iban' => '1'
         ];
+
+        $validator = Validator::make($data, ['tr_iban' => new TrIbanRule]);
+        $this->assertFalse($validator->passes());
 
         $validator = Validator::make($data, ['tr_iban' => 'tr_iban']);
         $this->assertFalse($validator->passes());
