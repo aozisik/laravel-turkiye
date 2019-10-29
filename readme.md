@@ -6,18 +6,6 @@ Türkiye'ye hizmet eden Laravel uygulamalarınız için doğrulama yardımcılar
 
 - [https://github.com/aozisik/turkce](https://github.com/aozisik/turkce)
 
-## Kurulum (Laravel 5.0-5.4)
-
-```bash
-composer require aozisik/laravel-turkiye "^2.0"
-```
-
-Kurulumdan sonra aşağıdaki satırı app/config.php dosyanızda ilgili yere ekleyin:
-
-```php
-Aozisik\LaravelTurkiye\Providers\TurkiyeServiceProvider::class,
-```
-
 ## Kurulum (Laravel 5.5 ve sonrası)
 
 ```bash
@@ -25,6 +13,14 @@ composer require aozisik/laravel-turkiye
 ```
 
 Laravel 5.5 ve sonraki sürümlerde ServiceProvider kaydını eklemeye gerek olmadan çalışır.
+
+## Kurulum (Laravel 5.0-5.4)
+
+```bash
+composer require aozisik/laravel-turkiye "^2.0"
+```
+
+Dokümantasyon için: [https://github.com/aozisik/laravel-turkiye/releases/tag/v2.0.0](https://github.com/aozisik/laravel-turkiye/releases/tag/v2.0.0)
 
 ## Doğrulama
 
