@@ -1,26 +1,17 @@
 <?php
 namespace Aozisik\LaravelTurkiye\Providers;
 
-use Aozisik\Turkiye\Validation\Iban;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Validator;
-use Aozisik\LaravelTurkiye\Validation\TcKimlikNo;
-use Aozisik\LaravelTurkiye\Validation\VergiKimlikNo;
 
 class TurkiyeServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Validator::extend('tckn', function ($attribute, $value, $parameters, $validator) {
-            return (new TcKimlikNo())->validate($value);
-        });
+        $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'turkiye');
 
-        Validator::extend('vkn', function ($attribute, $value, $parameters, $validator) {
-            return (new VergiKimlikNo())->validate($value);
-        });
-
-        Validator::extend('tr_iban', function ($attribute, $value, $parameters, $validator) {
-            return (new Iban())->validate($value);
-        });
+        Validator::extend('tckn', '\Aozisik\LaravelTurkiye\Rules\TcKimlikNoRule@passes');
+        Validator::extend('vkn', '\Aozisik\LaravelTurkiye\Rules\VergiKimlikNoRule@passes');
+        Validator::extend('tr_iban', '\Aozisik\LaravelTurkiye\Rules\TrIbanRule@passes');
     }
 }

@@ -1,11 +1,11 @@
 <?php
-namespace Aozisik\LaravelTurkiye\Validation;
+namespace Aozisik\LaravelTurkiye\Rules;
 
-use Aozisik\LaravelTurkiye\Contracts\Validator;
+use Illuminate\Contracts\Validation\Rule;
 
-class VergiKimlikNo implements Validator
+class VergiKimlikNoRule implements Rule
 {
-    public function validate($value)
+    public function passes($attribute, $value)
     {
         if (strlen($value) !== 10) {
             return false;
@@ -18,5 +18,10 @@ class VergiKimlikNo implements Validator
         }
         $checksum = ($sum % 10 == 0) ? 0 : (10 - ($sum % 10));
         return $checksum == $value[9];
+    }
+
+    public function message()
+    {
+        return trans('turkiye::messages.vkn');
     }
 }
