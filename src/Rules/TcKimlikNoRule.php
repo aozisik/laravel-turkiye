@@ -1,9 +1,9 @@
 <?php
-namespace Aozisik\LaravelTurkiye\Validation;
+namespace Aozisik\LaravelTurkiye\Rules;
 
-use Aozisik\LaravelTurkiye\Contracts\Validator;
+use Illuminate\Contracts\Validation\Rule;
 
-class TcKimlikNo implements Validator
+class TcKimlikNoRule implements Rule
 {
     private $disallowed = [
         '11111111110',
@@ -17,13 +17,18 @@ class TcKimlikNo implements Validator
         '99999999990',
     ];
 
-    public function validate($value)
+    public function passes($attribute, $value)
     {
         $value = strval($value);
         if (strlen($value) != 11 || $value[0] === '0' || in_array($value, $this->disallowed)) {
             return false;
         }
         return $this->firstCheck($value) && $this->secondCheck($value);
+    }
+
+    public function message()
+    {
+        return trans('turkiye::messages.tckn');
     }
 
     private function firstCheck($value)

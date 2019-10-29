@@ -1,37 +1,53 @@
-Laravel Türkiye Paketi 🇹🇷
-==========
+# Laravel Türkiye Paketi 🇹🇷
 
 ![](https://travis-ci.org/aozisik/laravel-turkiye.svg?branch=master)
 
 Türkiye'ye hizmet eden Laravel uygulamalarınız için doğrulama yardımcıları içerir. Türkçe dil yardımcıları ayrı bir pakete taşınmıştır:
-* [https://github.com/aozisik/turkce](https://github.com/aozisik/turkce)
 
+- [https://github.com/aozisik/turkce](https://github.com/aozisik/turkce)
 
-## Kurulum
+## Kurulum (Laravel 5.5 ve sonrası)
 
-Laravel 5.* kullanan projenize eklemek için:
-	
-	composer require aozisik/laravel-turkiye
+```bash
+composer require aozisik/laravel-turkiye
+```
 
-Laravel 5.5 sürümünü kullanıyorsanız, paketin kurulumu otomatik tamamlanacaktır.
-Eğer daha eski bir sürüm kullanıyorsanız, aşağıdaki satırı app/config.php dosyanızda ilgili yere ekleyin.
+Laravel 5.5 ve sonraki sürümlerde ServiceProvider kaydını eklemeye gerek olmadan çalışır.
 
-	Aozisik\LaravelTurkiye\Providers\TurkiyeServiceProvider::class,
-	
+## Kurulum (Laravel 5.0-5.4)
+
+```bash
+composer require aozisik/laravel-turkiye "^2.0"
+```
+
+Dokümantasyon için: [https://github.com/aozisik/laravel-turkiye/releases/tag/v2.0.0](https://github.com/aozisik/laravel-turkiye/releases/tag/v2.0.0)
+
 ## Doğrulama
 
-#### TC Kimlik No Doğrulama
+#### TC Kimlik Numarası Doğrulama
 
 Girilen TC kimlik numarasını uzunluk ve matematiksel özellikleri yönünden değerlendirir.
 
-	$this->validate($request, ['kimlik_no' => 'required|tckn']);
+```php
+$this->validate($request, ['kimlik_no' => ['required', new TcKimlikNoRule()]]);
+```
 
-#### Vergi Kimlik No Doğrulama
+#### Vergi Kimlik Numarası Doğrulama
 
-Girilen Vergi kimlik numarasını uzunluk ve matematiksel özellikleri yönünden 
+Girilen Vergi kimlik numarasını uzunluk ve matematiksel özellikleri yönünden
 değerlendirir.
 
-	$this->validate($request, ['vergi_no' => 'required|vkn']);
+```php
+$this->validate($request, ['vergi_no' => ['required', new VergiKimlikNoRule()]]);
+```
+
+#### Türkiye IBAN Numarası Doğrulama
+
+Girilen IBAN no'yu doğrular ve Türkiye kodlu olduğunu garantiler.
+
+```php
+$this->validate($request, ['iban' => ['required', new TrIbanRule()]]);
+```
 
 ## Katkıda Bulunma
 

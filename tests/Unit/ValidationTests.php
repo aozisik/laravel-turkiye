@@ -2,8 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 use Aozisik\LaravelTurkiye\Validation\Iban;
-use Aozisik\LaravelTurkiye\Validation\TcKimlikNo;
-use Aozisik\LaravelTurkiye\Validation\VergiKimlikNo;
+use Aozisik\LaravelTurkiye\Rules\TcKimlikNoRule;
+use Aozisik\LaravelTurkiye\Rules\TrIbanRule;
+use Aozisik\LaravelTurkiye\Rules\VergiKimlikNoRule;
 
 class ValidationTests extends TestCase
 {
@@ -12,27 +13,21 @@ class ValidationTests extends TestCase
      */
     public function tc_kimlik_no()
     {
-        $validator = new TcKimlikNo();
+        $rule = new TcKimlikNoRule();
 
-        $this->assertTrue($validator->validate('10000000146')); // Mustafa Kemal Atatürk!
-        $this->assertTrue($validator->validate('35044266730')); // Uğur Dündar?
+        $this->assertRulePasses($rule, '10000000146'); // Mustafa Kemal Atatürk!
+        $this->assertRulePasses($rule, '35044266730'); // Uğur Dündar?
 
-        $this->assertFalse($validator->validate('1235'));
-        $this->assertFalse($validator->validate('11111111110')); // Haberlere çıkan şanssız arkadaşımızın başına daha fazla bela açılmasın...
-        $this->assertFalse($validator->validate('22222222220'));
-        $this->assertFalse($validator->validate('33333333330'));
-        $this->assertFalse($validator->validate('01215141105'));
-        $this->assertFalse($validator->validate('34259710069'));
-        $this->assertFalse($validator->validate('12351232111'));
-        $this->assertFalse($validator->validate('63261461122'));
-        $this->assertFalse($validator->validate('12341232232'));
-        $this->assertFalse($validator->validate('342597100692'));
-    }
-
-    private function vkn_dogrulama($value)
-    {
-        $validation = new VergiKimlikNo();
-        return $validation->validate($value);
+        $this->assertRuleFails($rule, '1235');
+        $this->assertRuleFails($rule, '11111111110'); // Haberlere çıkan şanssız arkadaşımızın başına daha fazla bela açılmasın...
+        $this->assertRuleFails($rule, '22222222220');
+        $this->assertRuleFails($rule, '33333333330');
+        $this->assertRuleFails($rule, '01215141105');
+        $this->assertRuleFails($rule, '34259710069');
+        $this->assertRuleFails($rule, '12351232111');
+        $this->assertRuleFails($rule, '63261461122');
+        $this->assertRuleFails($rule, '12341232232');
+        $this->assertRuleFails($rule, '342597100692');
     }
 
     /**
@@ -40,18 +35,20 @@ class ValidationTests extends TestCase
      */
     public function vergi_kimlik_no()
     {
+        $rule = new VergiKimlikNoRule();
+
         // Invalid
-        $this->assertFalse($this->vkn_dogrulama('invalid'));
-        $this->assertFalse($this->vkn_dogrulama('1710443373'));
-        $this->assertFalse($this->vkn_dogrulama('0710443371'));
+        $this->assertRuleFails($rule, 'invalid');
+        $this->assertRuleFails($rule, '1710443373');
+        $this->assertRuleFails($rule, '0710443371');
         // Valid
-        $this->assertTrue($this->vkn_dogrulama('0710443373'));
-        $this->assertTrue($this->vkn_dogrulama('4780163831'));
-        $this->assertTrue($this->vkn_dogrulama('0350003022'));
-        $this->assertTrue($this->vkn_dogrulama('9980070251'));
-        $this->assertTrue($this->vkn_dogrulama('4560007243'));
-        $this->assertTrue($this->vkn_dogrulama('8730341530'));
-        $this->assertTrue($this->vkn_dogrulama('7290012773'));
+        $this->assertRulePasses($rule, '0710443373');
+        $this->assertRulePasses($rule, '4780163831');
+        $this->assertRulePasses($rule, '0350003022');
+        $this->assertRulePasses($rule, '9980070251');
+        $this->assertRulePasses($rule, '4560007243');
+        $this->assertRulePasses($rule, '8730341530');
+        $this->assertRulePasses($rule, '7290012773');
     }
 
     /**
@@ -59,18 +56,18 @@ class ValidationTests extends TestCase
      */
     public function iban()
     {
-        $validator = new Iban();
+        $rule = new TrIbanRule();
 
-        $this->assertTrue($validator->validate('TR 68 00062 0 0000222990028402'));
-        $this->assertTrue($validator->validate('TR680006200000222990028402'));
+        $this->assertRulePasses($rule, 'TR 68 00062 0 0000222990028402');
+        $this->assertRulePasses($rule, 'TR680006200000222990028402');
         // Checksum doğru değil
         //$this->assertFalse($validator->validate('TR5852 5 252 5896 585 47826'));
         // Fazla karakter
-        $this->assertFalse($validator->validate('TR5852 5 252 5896 585 447826'));
+        $this->assertRuleFails($rule, 'TR5852 5 252 5896 585 447826');
         // Eksik karakter
-        $this->assertFalse($validator->validate('TR5852 5 252 5896 585 44782'));
+        $this->assertRuleFails($rule, 'TR5852 5 252 5896 585 44782');
         // Türkiye değil
-        $this->assertFalse($validator->validate('DE5852 5 252 5896 585 47826'));
+        $this->assertRuleFails($rule, 'DE5852 5 252 5896 585 47826');
     }
 
     /**
@@ -103,5 +100,24 @@ class ValidationTests extends TestCase
     public function plaka()
     {
         $this->assertTrue(true);
+    }
+
+    private function validateRule($rule, $value)
+    {
+        return $rule->passes('', $value);
+    }
+
+    private function assertRulePasses($rule, $value)
+    {
+        return $this->assertTrue(
+            $this->validateRule($rule, $value)
+        );
+    }
+
+    private function assertRuleFails($rule, $value)
+    {
+        return $this->assertFalse(
+            $this->validateRule($rule, $value)
+        );
     }
 }
