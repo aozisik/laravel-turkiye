@@ -24,7 +24,7 @@ Dokümantasyon için: [https://github.com/aozisik/laravel-turkiye/releases/tag/v
 
 ## Doğrulama
 
-#### TC Kimlik No Doğrulama
+#### TC Kimlik Numarası Doğrulama
 
 Girilen TC kimlik numarasını uzunluk ve matematiksel özellikleri yönünden değerlendirir.
 
@@ -32,7 +32,7 @@ Girilen TC kimlik numarasını uzunluk ve matematiksel özellikleri yönünden d
 $this->validate($request, ['kimlik_no' => ['required', new TcKimlikNoRule()]]);
 ```
 
-#### Vergi Kimlik No Doğrulama
+#### Vergi Kimlik Numarası Doğrulama
 
 Girilen Vergi kimlik numarasını uzunluk ve matematiksel özellikleri yönünden
 değerlendirir.
@@ -41,7 +41,7 @@ değerlendirir.
 $this->validate($request, ['vergi_no' => ['required', new VergiKimlikNoRule()]]);
 ```
 
-#### Türkiye IBAN NO Doğrulama
+#### Türkiye IBAN Numarası Doğrulama
 
 Girilen IBAN no'yu doğrular ve Türkiye kodlu olduğunu garantiler.
 
