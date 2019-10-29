@@ -6,15 +6,25 @@ Türkiye'ye hizmet eden Laravel uygulamalarınız için doğrulama yardımcılar
 
 - [https://github.com/aozisik/turkce](https://github.com/aozisik/turkce)
 
-## Kurulum
+## Kurulum (Laravel 5.0-5.4)
 
-Laravel 5.\*-6.* kullanan projenize eklemek için:
+```bash
+composer require aozisik/laravel-turkiye "^2.0"
+```
+
+Kurulumdan sonra aşağıdaki satırı app/config.php dosyanızda ilgili yere ekleyin:
+
+```php
+Aozisik\LaravelTurkiye\Providers\TurkiyeServiceProvider::class,
+```
+
+## Kurulum (Laravel 5.5 ve sonrası)
+
+```bash
 composer require aozisik/laravel-turkiye
+```
 
-Laravel 5.5 ve üstü sürümlerde kaynak kodlarınızda değişiklik yapmaya gerek olmadan aktifleşir.
-Eğer daha eski bir sürüm kullanıyorsanız, aşağıdaki satırı app/config.php dosyanızda ilgili yere ekleyin.
-
-    Aozisik\LaravelTurkiye\Providers\TurkiyeServiceProvider::class,
+Laravel 5.5 ve sonraki sürümlerde ServiceProvider kaydını eklemeye gerek olmadan çalışır.
 
 ## Doğrulama
 
@@ -22,14 +32,26 @@ Eğer daha eski bir sürüm kullanıyorsanız, aşağıdaki satırı app/config.
 
 Girilen TC kimlik numarasını uzunluk ve matematiksel özellikleri yönünden değerlendirir.
 
-    $this->validate($request, ['kimlik_no' => 'required|tckn']);
+```php
+$this->validate($request, ['kimlik_no' => ['required', new TcKimlikNoRule()]]);
+```
 
 #### Vergi Kimlik No Doğrulama
 
 Girilen Vergi kimlik numarasını uzunluk ve matematiksel özellikleri yönünden
 değerlendirir.
 
-    $this->validate($request, ['vergi_no' => 'required|vkn']);
+```php
+$this->validate($request, ['vergi_no' => ['required', new VergiKimlikNoRule()]]);
+```
+
+#### Türkiye IBAN NO Doğrulama
+
+Girilen IBAN no'yu doğrular ve Türkiye kodlu olduğunu garantiler.
+
+```php
+$this->validate($request, ['iban' => ['required', new TrIbanRule()]]);
+```
 
 ## Katkıda Bulunma
 
